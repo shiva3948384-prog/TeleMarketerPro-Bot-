@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and stats",
+      "type": "object",
+      "properties": {
+        "violations": { "type": "number" },
+        "stats": { "type": "object" },
+        "autoReplyMessage": { "type": "string" }
+      }
+    },
+    "Account": {
+      "title": "Account",
+      "description": "Connected Telegram account",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "number" },
+        "phone": { "type": "string" },
+        "session": { "type": "string" },
+        "addedAt": { "type": "string", "format": "date-time" },
+        "autoReply": { "type": "boolean" },
+        "stats": { "type": "object" }
+      }
+    },
+    "Template": {
+      "title": "Template",
+      "description": "Ad template",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "number" },
+        "name": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "GlobalConfig": {
+      "title": "Global Configuration",
+      "description": "Admin settings and global stats",
+      "type": "object",
+      "properties": {
+        "bannedUsers": { "type": "array" },
+        "admins": { "type": "array" },
+        "brandingExempt": { "type": "array" },
+        "totalMessagesSent": { "type": "number" },
+        "totalGroupsMessaged": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user data and stats"
+    },
+    "/accounts/{phone}": {
+      "schema": "Account",
+      "description": "Telegram accounts linked to users"
+    },
+    "/templates/{templateId}": {
+      "schema": "Template",
+      "description": "Saved ad templates"
+    },
+    "/config/global": {
+      "schema": "GlobalConfig",
+      "description": "Global application state"
+    }
+  }
+}
